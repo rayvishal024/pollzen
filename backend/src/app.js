@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import hetmet from 'helmet';
 
 import { errorHandler } from './middleware/error.middleware.js';
 import { notFound } from './middleware/notFound.middleware.js';
@@ -20,7 +21,8 @@ export default function createApp() {
   app.use(express.json({ limit: '16kb' }));
   app.use(express.urlencoded({ extended: true }));
   app.use(limiter);
-
+  app.use(helmet());
+  
   // Routes Register
   app.use('/api/v1/health', healthRouter);
   app.use('/api/v1/auth', authRouter);
